@@ -22,7 +22,7 @@ public class TelaHome extends javax.swing.JPanel {
 
         BT_CadastrarPet = new javax.swing.JButton();
         LB_PetShop = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -31,17 +31,17 @@ public class TelaHome extends javax.swing.JPanel {
                 BT_CadastrarPetActionPerformed(evt);
             }
         });
-        add(BT_CadastrarPet, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 540, 390, 140));
+        add(BT_CadastrarPet, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 340, 140));
 
         LB_PetShop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LB_PetShopMouseClicked(evt);
             }
         });
-        add(LB_PetShop, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 150, 40));
+        add(LB_PetShop, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 130, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaHome.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaHome.png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BT_CadastrarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_CadastrarPetActionPerformed
@@ -68,6 +68,6 @@ public class TelaHome extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_CadastrarPet;
     private javax.swing.JLabel LB_PetShop;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

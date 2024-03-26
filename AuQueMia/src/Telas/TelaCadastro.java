@@ -1,9 +1,9 @@
 package Telas;
 
 import Classes.Veterinario;
-import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -59,6 +59,7 @@ public class TelaCadastro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LB_DataNasc1 = new javax.swing.JLabel();
         TF_Nome = new javax.swing.JTextField();
         LB_Nome = new javax.swing.JLabel();
         TF_CPF = new javax.swing.JTextField();
@@ -85,110 +86,120 @@ public class TelaCadastro extends javax.swing.JPanel {
         TF_Telefone = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        FotoFundo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        TF_Nome.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        LB_DataNasc1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        LB_DataNasc1.setForeground(new java.awt.Color(255, 255, 255));
+        LB_DataNasc1.setText("YYYY-MM-DD");
+        add(LB_DataNasc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 90, 30));
+
+        TF_Nome.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_Nome.setForeground(new java.awt.Color(102, 102, 255));
         TF_Nome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_NomeKeyPressed(evt);
             }
         });
-        add(TF_Nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 340, 40));
+        add(TF_Nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 270, 30));
 
-        LB_Nome.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Nome.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Nome.setForeground(new java.awt.Color(255, 255, 255));
         LB_Nome.setText("Nome:");
-        add(LB_Nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, -1, 60));
+        add(LB_Nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, 60));
 
-        TF_CPF.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_CPF.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_CPF.setForeground(new java.awt.Color(102, 102, 255));
         TF_CPF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_CPFKeyPressed(evt);
             }
         });
-        add(TF_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 250, 340, 40));
+        add(TF_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 270, 30));
 
-        LB_CPF.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_CPF.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_CPF.setForeground(new java.awt.Color(255, 255, 255));
         LB_CPF.setText("CPF:");
-        add(LB_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 70, 50));
+        add(LB_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 250, 70, 50));
 
-        TF_Senha.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_Senha.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_Senha.setForeground(new java.awt.Color(102, 102, 255));
-        add(TF_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 620, 270, 40));
+        add(TF_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 520, 200, 30));
 
-        LB_Senha.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Senha.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Senha.setForeground(new java.awt.Color(255, 255, 255));
         LB_Senha.setText("Senha:");
-        add(LB_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 90, 50));
+        add(LB_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 90, 50));
 
-        TF_Email.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_Email.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_Email.setForeground(new java.awt.Color(102, 102, 255));
-        add(TF_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 340, 40));
+        add(TF_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 270, 30));
 
-        LB_Email.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Email.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Email.setForeground(new java.awt.Color(255, 255, 255));
         LB_Email.setText("Email:");
-        add(LB_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, 50));
+        add(LB_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, 50));
 
-        jComboBox1.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(102, 102, 255));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, 340, 40));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 270, 30));
 
-        LB_Genero.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Genero.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Genero.setForeground(new java.awt.Color(255, 255, 255));
         LB_Genero.setText("Gênero:");
-        add(LB_Genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 330, 110, 30));
+        add(LB_Genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 310, 110, 30));
 
-        TF_DataNasc.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_DataNasc.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_DataNasc.setForeground(new java.awt.Color(102, 102, 255));
         TF_DataNasc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_DataNascKeyPressed(evt);
             }
         });
-        add(TF_DataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 340, 40));
+        add(TF_DataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 270, 30));
 
-        LB_DataNasc.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_DataNasc.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_DataNasc.setForeground(new java.awt.Color(255, 255, 255));
         LB_DataNasc.setText("Data Nasc:");
-        add(LB_DataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, 30));
+        add(LB_DataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, 30));
 
-        TF_Endereço.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_Endereço.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_Endereço.setForeground(new java.awt.Color(102, 102, 255));
-        add(TF_Endereço, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 390, 340, 40));
+        add(TF_Endereço, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 270, 30));
 
-        LB_Endereço.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Endereço.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Endereço.setForeground(new java.awt.Color(255, 255, 255));
         LB_Endereço.setText("Endereço:");
-        add(LB_Endereço, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 400, 130, 30));
+        add(LB_Endereço, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 130, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LB_Usuário.setBackground(new java.awt.Color(255, 255, 255));
-        LB_Usuário.setFont(new java.awt.Font("Monospaced", 1, 28)); // NOI18N
+        LB_Usuário.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Usuário.setForeground(new java.awt.Color(115, 153, 250));
         LB_Usuário.setText("SELECIONE O USUÁRIO:");
-        jPanel1.add(LB_Usuário, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 350, 30));
+        jPanel1.add(LB_Usuário, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 30));
 
         RB_Medico.setBackground(new java.awt.Color(255, 255, 255));
-        RB_Medico.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        RB_Medico.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         RB_Medico.setForeground(new java.awt.Color(115, 153, 250));
-        RB_Medico.setText("Médico(a)");
+        RB_Medico.setText("Veterinário(a)");
         RB_Medico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RB_MedicoMouseClicked(evt);
             }
         });
-        jPanel1.add(RB_Medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 160, -1));
+        RB_Medico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RB_MedicoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(RB_Medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 160, -1));
 
         RB_Secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        RB_Secretaria.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        RB_Secretaria.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         RB_Secretaria.setForeground(new java.awt.Color(115, 153, 250));
         RB_Secretaria.setText("Secretária");
         RB_Secretaria.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -196,48 +207,53 @@ public class TelaCadastro extends javax.swing.JPanel {
                 RB_SecretariaMouseClicked(evt);
             }
         });
-        jPanel1.add(RB_Secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 180, -1));
+        jPanel1.add(RB_Secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 120, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, 410, 130));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, 310, 90));
 
-        TF_CRMV.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_CRMV.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_CRMV.setForeground(new java.awt.Color(102, 102, 255));
         TF_CRMV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_CRMVKeyPressed(evt);
             }
         });
-        add(TF_CRMV, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 340, 40));
+        add(TF_CRMV, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 270, 30));
 
-        LB_CRMV.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_CRMV.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_CRMV.setForeground(new java.awt.Color(255, 255, 255));
         LB_CRMV.setText("CRMV:");
-        add(LB_CRMV, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 70, 50));
+        add(LB_CRMV, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 70, 50));
 
-        TF_Senha1.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_Senha1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_Senha1.setForeground(new java.awt.Color(102, 102, 255));
-        add(TF_Senha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 620, 290, 40));
+        TF_Senha1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TF_Senha1ActionPerformed(evt);
+            }
+        });
+        add(TF_Senha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, 270, 30));
 
-        LB_Senha1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Senha1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Senha1.setForeground(new java.awt.Color(255, 255, 255));
         LB_Senha1.setText("Repita a Senha:");
-        add(LB_Senha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 620, 220, 50));
+        add(LB_Senha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, 170, 50));
 
-        LB_Telefone.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_Telefone.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_Telefone.setForeground(new java.awt.Color(255, 255, 255));
         LB_Telefone.setText("Telefone:");
-        add(LB_Telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 560, -1, 30));
+        add(LB_Telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, 30));
 
-        TF_Telefone.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        TF_Telefone.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         TF_Telefone.setForeground(new java.awt.Color(102, 102, 255));
         TF_Telefone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_TelefoneKeyPressed(evt);
             }
         });
-        add(TF_Telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 550, 340, 40));
+        add(TF_Telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 270, 30));
 
-        jButton1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(115, 153, 250));
         jButton1.setText("FINALIZAR CADASTRO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -245,9 +261,9 @@ public class TelaCadastro extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 710, 290, 70));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, 210, 50));
 
-        jButton3.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(115, 153, 250));
         jButton3.setText("<<< VOLTAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -255,15 +271,16 @@ public class TelaCadastro extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 710, 290, 70));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 570, 210, 50));
 
-        FotoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaCadastro.png"))); // NOI18N
-        add(FotoFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaCadastro.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TF_NomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_NomeKeyPressed
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+        int keyCode = evt.getKeyCode();
+        if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
             TF_Nome.setEditable(true);
         } else {
             TF_Nome.setEditable(false);
@@ -420,11 +437,19 @@ public class TelaCadastro extends javax.swing.JPanel {
         janela.pack();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void RB_MedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_MedicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RB_MedicoActionPerformed
+
+    private void TF_Senha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_Senha1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TF_Senha1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel FotoFundo;
     private javax.swing.JLabel LB_CPF;
     private javax.swing.JLabel LB_CRMV;
     private javax.swing.JLabel LB_DataNasc;
+    private javax.swing.JLabel LB_DataNasc1;
     private javax.swing.JLabel LB_Email;
     private javax.swing.JLabel LB_Endereço;
     private javax.swing.JLabel LB_Genero;
@@ -447,6 +472,7 @@ public class TelaCadastro extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

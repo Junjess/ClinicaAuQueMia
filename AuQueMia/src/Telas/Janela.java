@@ -9,6 +9,7 @@ public class Janela extends javax.swing.JFrame {
     static TelaHome TelaC;
     static TelaPetShop TelaD;
     static TelaCadastroAnimais TelaE;
+    static TelaHomeMedico TelaF;
     
     public Janela() {
         initComponents();

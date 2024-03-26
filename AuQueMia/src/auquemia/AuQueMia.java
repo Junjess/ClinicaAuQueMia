@@ -11,7 +11,6 @@ public class AuQueMia {
         j.setLocationRelativeTo(null);
         j.setVisible(true);
         j.setExtendedState(Janela.MAXIMIZED_BOTH);
-        j.setUndecorated(true);
     }
     
     

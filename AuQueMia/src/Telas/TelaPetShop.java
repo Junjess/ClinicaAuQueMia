@@ -16,16 +16,16 @@ public class TelaPetShop extends javax.swing.JPanel {
     private void initComponents() {
 
         LB_Home = new javax.swing.JLabel();
-        LB_Banho = new javax.swing.JLabel();
-        LB_Tosa = new javax.swing.JLabel();
-        LB_BanhoeTosa = new javax.swing.JLabel();
         LB_GifBanho1 = new javax.swing.JLabel();
         LB_GifBanho2 = new javax.swing.JLabel();
-        LB_GifBanhoeTosa1 = new javax.swing.JLabel();
-        LB_GifBanhoeTosa2 = new javax.swing.JLabel();
+        LB_Banho = new javax.swing.JLabel();
+        LB_Tosa = new javax.swing.JLabel();
         LB_GifTosa2 = new javax.swing.JLabel();
         LB_GifTosa1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        LB_BanhoeTosa = new javax.swing.JLabel();
+        LB_GifBanhoeTosa1 = new javax.swing.JLabel();
+        LB_GifBanhoeTosa2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -34,55 +34,49 @@ public class TelaPetShop extends javax.swing.JPanel {
                 LB_HomeMouseClicked(evt);
             }
         });
-        add(LB_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 150, 40));
+        add(LB_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 80, 40));
+
+        LB_GifBanho1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border.gif"))); // NOI18N
+        add(LB_GifBanho1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
+
+        LB_GifBanho2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border (1).gif"))); // NOI18N
+        add(LB_GifBanho2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, -1, -1));
 
         LB_Banho.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 LB_BanhoMouseMoved(evt);
             }
         });
-        add(LB_Banho, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 310, 450));
+        add(LB_Banho, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 240, 350));
 
         LB_Tosa.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 LB_TosaMouseMoved(evt);
             }
         });
-        add(LB_Tosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 330, 310, 450));
+        add(LB_Tosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 230, 350));
+
+        LB_GifTosa2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border (1).gif"))); // NOI18N
+        add(LB_GifTosa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, -1, -1));
+
+        LB_GifTosa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border.gif"))); // NOI18N
+        add(LB_GifTosa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 370, -1, -1));
 
         LB_BanhoeTosa.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 LB_BanhoeTosaMouseMoved(evt);
             }
         });
-        add(LB_BanhoeTosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 320, 310, 450));
-
-        LB_GifBanho1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border.gif"))); // NOI18N
-        add(LB_GifBanho1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, -1, -1));
-
-        LB_GifBanho2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border (1).gif"))); // NOI18N
-        add(LB_GifBanho2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, -1));
+        add(LB_BanhoeTosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, 230, 350));
 
         LB_GifBanhoeTosa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border.gif"))); // NOI18N
-        add(LB_GifBanhoeTosa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 500, -1, -1));
+        add(LB_GifBanhoeTosa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 370, -1, -1));
 
         LB_GifBanhoeTosa2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border (1).gif"))); // NOI18N
-        add(LB_GifBanhoeTosa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 500, -1, -1));
+        add(LB_GifBanhoeTosa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 370, -1, -1));
 
-        LB_GifTosa2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border (1).gif"))); // NOI18N
-        add(LB_GifTosa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 500, -1, -1));
-
-        LB_GifTosa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/border.gif"))); // NOI18N
-        add(LB_GifTosa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelasPetShop.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel2MouseMoved(evt);
-            }
-        });
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaPetShop.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void setarGifs(){
@@ -128,10 +122,6 @@ public class TelaPetShop extends javax.swing.JPanel {
         LB_GifBanhoeTosa2.setVisible(true);
     }//GEN-LAST:event_LB_BanhoeTosaMouseMoved
 
-    private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
-        setarGifs();
-    }//GEN-LAST:event_jLabel2MouseMoved
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LB_Banho;
@@ -144,6 +134,6 @@ public class TelaPetShop extends javax.swing.JPanel {
     private javax.swing.JLabel LB_GifTosa2;
     private javax.swing.JLabel LB_Home;
     private javax.swing.JLabel LB_Tosa;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

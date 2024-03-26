@@ -43,11 +43,11 @@ public class TelaLogin extends javax.swing.JPanel {
         TF_CPF = new javax.swing.JTextField();
         LB_CPF = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        TeladeLogin = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LB_CriarConta2.setFont(new java.awt.Font("Monospaced", 2, 24)); // NOI18N
+        LB_CriarConta2.setFont(new java.awt.Font("Monospaced", 2, 18)); // NOI18N
         LB_CriarConta2.setForeground(new java.awt.Color(115, 153, 250));
         LB_CriarConta2.setText("aqui");
         LB_CriarConta2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -55,20 +55,20 @@ public class TelaLogin extends javax.swing.JPanel {
                 LB_CriarConta2MouseClicked(evt);
             }
         });
-        add(LB_CriarConta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 720, -1, 30));
+        add(LB_CriarConta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 530, -1, 20));
 
-        LB_CriarConta1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        LB_CriarConta1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         LB_CriarConta1.setForeground(new java.awt.Color(102, 102, 102));
-        LB_CriarConta1.setText("Nao tem conta? Clique");
-        add(LB_CriarConta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 720, -1, 30));
+        LB_CriarConta1.setText("Criar conta?");
+        add(LB_CriarConta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 530, -1, 20));
 
-        LB_Usuario.setFont(new java.awt.Font("Monospaced", 1, 36)); // NOI18N
+        LB_Usuario.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         LB_Usuario.setForeground(new java.awt.Color(115, 153, 250));
         LB_Usuario.setText("Usuário:");
-        add(LB_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 470, 190, 60));
+        add(LB_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 140, 60));
 
         RB_Secretaria.setBackground(new java.awt.Color(255, 255, 255));
-        RB_Secretaria.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        RB_Secretaria.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         RB_Secretaria.setForeground(new java.awt.Color(115, 153, 250));
         RB_Secretaria.setText("Secretária");
         RB_Secretaria.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -76,10 +76,10 @@ public class TelaLogin extends javax.swing.JPanel {
                 RB_SecretariaMouseClicked(evt);
             }
         });
-        add(RB_Secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 550, -1, -1));
+        add(RB_Secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 420, -1, -1));
 
         RB_Medico.setBackground(new java.awt.Color(255, 255, 255));
-        RB_Medico.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        RB_Medico.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         RB_Medico.setForeground(new java.awt.Color(115, 153, 250));
         RB_Medico.setText("Médico(a)");
         RB_Medico.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,35 +87,33 @@ public class TelaLogin extends javax.swing.JPanel {
                 RB_MedicoMouseClicked(evt);
             }
         });
-        add(RB_Medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 550, -1, -1));
+        add(RB_Medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 420, -1, -1));
 
-        TF_Senha.setBackground(new java.awt.Color(255, 255, 255));
-        TF_Senha.setFont(new java.awt.Font("Monospaced", 1, 30)); // NOI18N
+        TF_Senha.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         TF_Senha.setForeground(new java.awt.Color(102, 102, 255));
-        add(TF_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 440, 50));
+        add(TF_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 310, -1));
 
-        LB_Senha.setFont(new java.awt.Font("Monospaced", 1, 36)); // NOI18N
+        LB_Senha.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         LB_Senha.setForeground(new java.awt.Color(115, 153, 250));
         LB_Senha.setText("Senha:");
-        add(LB_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 390, 140, 60));
+        add(LB_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, 90, 60));
 
-        TF_CPF.setBackground(new java.awt.Color(255, 255, 255));
-        TF_CPF.setFont(new java.awt.Font("Monospaced", 1, 30)); // NOI18N
+        TF_CPF.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         TF_CPF.setForeground(new java.awt.Color(102, 102, 255));
         TF_CPF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_CPFKeyPressed(evt);
             }
         });
-        add(TF_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 250, 440, 50));
+        add(TF_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 310, 40));
 
-        LB_CPF.setFont(new java.awt.Font("Monospaced", 1, 36)); // NOI18N
+        LB_CPF.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         LB_CPF.setForeground(new java.awt.Color(115, 153, 250));
         LB_CPF.setText("CPF:");
-        add(LB_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 250, 100, 60));
+        add(LB_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 250, 70, 50));
 
         jButton1.setBackground(new java.awt.Color(115, 153, 250));
-        jButton1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("ENTRAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,10 +121,10 @@ public class TelaLogin extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 630, 290, 60));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, 240, 50));
 
-        TeladeLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/loginTam.png"))); // NOI18N
-        add(TeladeLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1630, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaLogin.png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void LB_CriarConta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_CriarConta2MouseClicked
@@ -198,11 +196,19 @@ public class TelaLogin extends javax.swing.JPanel {
                     result = preparedStatement.executeQuery();
             }
             if (result.next()) {
-                Janela.TelaC = new TelaHome();
-                JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaA);
-                janela.getContentPane().remove(Janela.TelaA);
-                janela.add(Janela.TelaC, BorderLayout.CENTER);
-                janela.pack();
+                if (RB_Medico.isSelected()) {
+                    Janela.TelaF = new TelaHomeMedico();
+                    JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaA);
+                    janela.getContentPane().remove(Janela.TelaA);
+                    janela.add(Janela.TelaF, BorderLayout.CENTER);
+                    janela.pack();
+                }else{
+                    Janela.TelaC = new TelaHome();
+                    JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaA);
+                    janela.getContentPane().remove(Janela.TelaA);
+                    janela.add(Janela.TelaC, BorderLayout.CENTER);
+                    janela.pack();
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "CPF ou senha inválidos", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -223,7 +229,7 @@ public class TelaLogin extends javax.swing.JPanel {
     private javax.swing.JRadioButton RB_Secretaria;
     private javax.swing.JTextField TF_CPF;
     private javax.swing.JTextField TF_Senha;
-    private javax.swing.JLabel TeladeLogin;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
