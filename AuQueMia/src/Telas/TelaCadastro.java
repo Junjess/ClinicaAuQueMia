@@ -1,6 +1,5 @@
 package Telas;
 
-import Classes.Veterinario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -19,6 +18,8 @@ public class TelaCadastro extends javax.swing.JPanel {
     String url = "jdbc:mysql://localhost:3306";
     String user = "root";
     String password = "";
+    int contVeterinario = 1;
+    int contSecretaria = 1;
         
     public TelaCadastro() {
         initComponents();
@@ -380,7 +381,8 @@ public class TelaCadastro extends javax.swing.JPanel {
                     }
                     query = "INSERT INTO Veterinario VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement consulta = connection.prepareStatement(query);
-                    consulta.setString(1, "1");
+                    String id = String.valueOf(contVeterinario);
+                    consulta.setString(1, id);
                     consulta.setString(2, TF_Nome.getText());
                     consulta.setString(3, TF_Endereço.getText());
                     consulta.setString(4, TF_Telefone.getText());
@@ -391,12 +393,14 @@ public class TelaCadastro extends javax.swing.JPanel {
                     consulta.setString(9, TF_Senha.getText());
                     consulta.setString(10, TF_CPF.getText());
                     consulta.execute();
+                    contVeterinario++;
                     JOptionPane.showMessageDialog(null, "Médico Cadastrado com Sucesso!");
                     cleanTF();
                 }else{
                     query = "INSERT INTO Secretaria VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement consulta = connection.prepareStatement(query);
-                    consulta.setString(1, "1");
+                    String id = String.valueOf(contSecretaria);
+                    consulta.setString(1, id);
                     consulta.setString(2, TF_Nome.getText());
                     consulta.setString(3, TF_Endereço.getText());
                     consulta.setString(4, TF_Telefone.getText());
@@ -406,6 +410,7 @@ public class TelaCadastro extends javax.swing.JPanel {
                     consulta.setString(8, TF_Senha.getText());
                     consulta.setString(9, TF_CPF.getText());
                     consulta.execute();
+                    contSecretaria++;
                     JOptionPane.showMessageDialog(null, "Secretária Cadastrado com Sucesso!");
                     cleanTF();
                 }

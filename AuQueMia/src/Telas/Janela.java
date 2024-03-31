@@ -10,6 +10,10 @@ public class Janela extends javax.swing.JFrame {
     static TelaPetShop TelaD;
     static TelaCadastroAnimais TelaE;
     static TelaHomeMedico TelaF;
+    static TelaServicoPetShop TelaG;
+    static TelaClinicaMedica TelaH;
+    static TelaVisualizarPet TelaI;
+    static TelaConfiguracoes TelaJ;
     
     public Janela() {
         initComponents();

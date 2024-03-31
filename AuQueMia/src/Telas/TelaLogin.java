@@ -65,7 +65,7 @@ public class TelaLogin extends javax.swing.JPanel {
         LB_Usuario.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         LB_Usuario.setForeground(new java.awt.Color(115, 153, 250));
         LB_Usuario.setText("Usuário:");
-        add(LB_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 140, 60));
+        add(LB_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 360, 140, 60));
 
         RB_Secretaria.setBackground(new java.awt.Color(255, 255, 255));
         RB_Secretaria.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -76,12 +76,12 @@ public class TelaLogin extends javax.swing.JPanel {
                 RB_SecretariaMouseClicked(evt);
             }
         });
-        add(RB_Secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 420, -1, -1));
+        add(RB_Secretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 420, -1, -1));
 
         RB_Medico.setBackground(new java.awt.Color(255, 255, 255));
         RB_Medico.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         RB_Medico.setForeground(new java.awt.Color(115, 153, 250));
-        RB_Medico.setText("Médico(a)");
+        RB_Medico.setText("Veterinário(a)");
         RB_Medico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RB_MedicoMouseClicked(evt);
@@ -91,7 +91,7 @@ public class TelaLogin extends javax.swing.JPanel {
 
         TF_Senha.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         TF_Senha.setForeground(new java.awt.Color(102, 102, 255));
-        add(TF_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 310, -1));
+        add(TF_Senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 310, 40));
 
         LB_Senha.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         LB_Senha.setForeground(new java.awt.Color(115, 153, 250));
@@ -197,7 +197,7 @@ public class TelaLogin extends javax.swing.JPanel {
             }
             if (result.next()) {
                 if (RB_Medico.isSelected()) {
-                    Janela.TelaF = new TelaHomeMedico();
+                    Janela.TelaF = new TelaHomeMedico(TF_CPF.getText());
                     JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaA);
                     janela.getContentPane().remove(Janela.TelaA);
                     janela.add(Janela.TelaF, BorderLayout.CENTER);

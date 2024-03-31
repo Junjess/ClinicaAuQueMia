@@ -1,7 +1,24 @@
 package Telas;
 
-public class TelaCadastroAnimais extends javax.swing.JPanel {
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
+public class TelaCadastroAnimais extends javax.swing.JPanel {
+    String url = "jdbc:mysql://localhost:3306";
+    String user = "root";
+    String password = "";
+    int contAnimais = 1;
+    int contClientes = 1;
+    
     public TelaCadastroAnimais() {
         initComponents();
     }
@@ -9,6 +26,10 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        LB_PetShop = new javax.swing.JLabel();
+        LB_Home = new javax.swing.JLabel();
+        TF_CPFDono = new javax.swing.JTextField();
         LB_Email = new javax.swing.JLabel();
         TF_Email = new javax.swing.JTextField();
         LB_Telefone = new javax.swing.JLabel();
@@ -28,9 +49,42 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         LB_Gênero = new javax.swing.JLabel();
         CB_Genero = new javax.swing.JComboBox<>();
         BT_Cadastrar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconeConfiguracoes.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 20, -1, -1));
+
+        LB_PetShop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LB_PetShopMouseClicked(evt);
+            }
+        });
+        add(LB_PetShop, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 120, 40));
+
+        LB_Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LB_HomeMouseClicked(evt);
+            }
+        });
+        add(LB_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 100, 40));
+
+        TF_CPFDono.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        TF_CPFDono.setForeground(new java.awt.Color(102, 102, 255));
+        TF_CPFDono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TF_CPFDonoKeyPressed(evt);
+            }
+        });
+        add(TF_CPFDono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 240, 260, -1));
 
         LB_Email.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         LB_Email.setForeground(new java.awt.Color(115, 153, 250));
@@ -163,13 +217,53 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         });
         add(BT_Cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 550, 340, 70));
 
+        jLabel3.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(115, 153, 250));
+        jLabel3.setText("CPF Dono:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 237, -1, 40));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconeSair.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, -1, -1));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaCadastroPet.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void setarLayout(){
+        TF_Nome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_CPFDono.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_Email.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        CB_Genero.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_Idade.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_Endereco.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_NomeDono.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_Especie.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_Raca.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TF_Telefone.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+    
+    public void cleanTF(){
+        TF_CPFDono.setText("");
+        TF_Email.setText("");
+        TF_Endereco.setText("");
+        TF_Especie.setText("");
+        TF_Idade.setText("");
+        TF_Nome.setText("");
+        TF_NomeDono.setText("");
+        TF_Raca.setText("");
+        TF_Telefone.setText("");
+        CB_Genero.setSelectedIndex(0);      
+    }
+    
     private void TF_NomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_NomeKeyPressed
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+        int keyCode = evt.getKeyCode();
+        if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
             TF_Nome.setEditable(true);
         } else {
             TF_Nome.setEditable(false);
@@ -178,19 +272,21 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
 
     private void TF_EspecieKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_EspecieKeyPressed
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            TF_Especie.setEditable(true);
+        int keyCode = evt.getKeyCode();
+        if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
+            TF_Nome.setEditable(true);
         } else {
-            TF_Especie.setEditable(false);
+            TF_Nome.setEditable(false);
         }
     }//GEN-LAST:event_TF_EspecieKeyPressed
 
     private void TF_RacaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_RacaKeyPressed
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            TF_Raca.setEditable(true);
+        int keyCode = evt.getKeyCode();
+        if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
+            TF_Nome.setEditable(true);
         } else {
-            TF_Raca.setEditable(false);
+            TF_Nome.setEditable(false);
         }
     }//GEN-LAST:event_TF_RacaKeyPressed
 
@@ -205,10 +301,11 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
 
     private void TF_NomeDonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_NomeDonoKeyPressed
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            TF_NomeDono.setEditable(true);
+        int keyCode = evt.getKeyCode();
+        if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
+            TF_Nome.setEditable(true);
         } else {
-            TF_NomeDono.setEditable(false);
+            TF_Nome.setEditable(false);
         }
     }//GEN-LAST:event_TF_NomeDonoKeyPressed
 
@@ -230,8 +327,113 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_TF_EmailKeyPressed
 
     private void BT_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_CadastrarActionPerformed
-        
+        setarLayout();
+        try {
+            if (TF_Nome.getText().equals("")) {
+                TF_Nome.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_CPFDono.getText().equals("")) {
+                TF_CPFDono.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Email.getText().equals("")) {
+                TF_Email.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (CB_Genero.getSelectedIndex() == 0) {
+                CB_Genero.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Idade.getText().equals("")) {
+                TF_Idade.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Endereco.getText().equals("")) {
+                TF_Endereco.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_NomeDono.getText().equals("")) {
+                TF_NomeDono.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Especie.getText().equals("")) {
+                TF_Especie.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Telefone.getText().equals("")) {
+                TF_Telefone.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Raca.getText().equals("")) {
+                TF_Raca.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if ((TF_CPFDono.getText().equals("")|| TF_Nome.getText().equals("") || TF_Email.getText().equals("") || 
+                    TF_NomeDono.getText().equals("") || TF_Idade.getText().equals("") || CB_Genero.getSelectedIndex() == 0 || TF_Endereco.getText().equals("")
+                    || TF_Especie.getText().equals("") || TF_Raca.getText().equals("") || TF_Telefone.getText().equals(""))) {
+                throw new Exception("Preencha ou selecione os campos necessários");
+            }
+            
+            try {
+                Connection connection = DriverManager.getConnection(url, user, password);
+                System.out.println("Conexao realizada com sucesso na base de dados: " + url);
+                String query = "USE mydb";
+                Statement statement = connection.createStatement();
+                statement.execute(query);   
+                
+                
+                query = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement consulta = connection.prepareStatement(query);
+                String idAnimais = String.valueOf(contAnimais);
+                String idCliente = String.valueOf(contClientes);
+                consulta.setString(1, idCliente);
+                consulta.setString(2, TF_NomeDono.getText());
+                consulta.setString(3, TF_Endereco.getText());
+                consulta.setString(4, TF_Telefone.getText());
+                consulta.setString(5, TF_Email.getText());
+                consulta.setString(6, TF_CPFDono.getText());
+                consulta.execute();
+                
+                query = "INSERT INTO Animal VALUES (?, ?, ?, ?, ?, ?, ?)";
+                consulta = connection.prepareStatement(query);                
+                consulta.setString(1, idAnimais);
+                consulta.setString(2, TF_Nome.getText());
+                consulta.setString(3, TF_Especie.getText());
+                consulta.setString(4, TF_Raca.getText());
+                consulta.setString(5, TF_Idade.getText());
+                consulta.setString(6, (String) CB_Genero.getSelectedItem());
+                consulta.setString(7, idCliente);
+                consulta.execute();
+                
+                
+                contAnimais++;
+                contClientes++;
+                JOptionPane.showMessageDialog(null, "Animal e Dono Cadastrado com Sucesso!");
+                cleanTF();
+                connection.close();  
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_BT_CadastrarActionPerformed
+
+    private void LB_HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_HomeMouseClicked
+        Janela.TelaC = new TelaHome();
+        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaE);
+        janela.getContentPane().remove(Janela.TelaE);
+        janela.add(Janela.TelaC, BorderLayout.CENTER);
+        janela.pack();
+    }//GEN-LAST:event_LB_HomeMouseClicked
+
+    private void TF_CPFDonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_CPFDonoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TF_CPFDonoKeyPressed
+
+    private void LB_PetShopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_PetShopMouseClicked
+        Janela.TelaD = new TelaPetShop();
+        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaE);
+        janela.getContentPane().remove(Janela.TelaE);
+        janela.add(Janela.TelaD, BorderLayout.CENTER);
+        janela.pack();
+    }//GEN-LAST:event_LB_PetShopMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Janela.TelaA= new TelaLogin();
+        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaE);
+        janela.getContentPane().remove(Janela.TelaE);
+        janela.add(Janela.TelaA, BorderLayout.CENTER);
+        janela.pack();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        Janela.TelaJ= new TelaConfiguracoes();
+        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaE);
+        janela.getContentPane().remove(Janela.TelaE);
+        janela.add(Janela.TelaJ, BorderLayout.CENTER);
+        janela.pack();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,11 +443,14 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel LB_Endereco;
     private javax.swing.JLabel LB_Especie;
     private javax.swing.JLabel LB_Gênero;
+    private javax.swing.JLabel LB_Home;
     private javax.swing.JLabel LB_Idade;
     private javax.swing.JLabel LB_Nome;
     private javax.swing.JLabel LB_NomeDono;
+    private javax.swing.JLabel LB_PetShop;
     private javax.swing.JLabel LB_Raca;
     private javax.swing.JLabel LB_Telefone;
+    private javax.swing.JTextField TF_CPFDono;
     private javax.swing.JTextField TF_Email;
     private javax.swing.JTextField TF_Endereco;
     private javax.swing.JTextField TF_Especie;
@@ -254,6 +459,9 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     private javax.swing.JTextField TF_NomeDono;
     private javax.swing.JTextField TF_Raca;
     private javax.swing.JTextField TF_Telefone;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
