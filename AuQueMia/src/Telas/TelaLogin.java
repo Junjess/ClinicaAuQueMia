@@ -133,8 +133,6 @@ public class TelaLogin extends javax.swing.JPanel {
         janela.getContentPane().remove(Janela.TelaA);
         janela.add(Janela.TelaB, BorderLayout.CENTER);
         janela.pack();
-        janela.setExtendedState(Janela.MAXIMIZED_BOTH);
-        janela.setUndecorated(true);
     }//GEN-LAST:event_LB_CriarConta2MouseClicked
 
     private void TF_CPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_CPFKeyPressed

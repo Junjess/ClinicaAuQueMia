@@ -1,7 +1,6 @@
 package Telas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaHomeMedico extends javax.swing.JPanel {

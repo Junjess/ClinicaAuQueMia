@@ -92,7 +92,6 @@ public class TelaHome extends javax.swing.JPanel {
         janela.getContentPane().remove(Janela.TelaC);
         janela.add(Janela.TelaE, BorderLayout.CENTER);
         janela.pack();
-        janela.setExtendedState(Janela.MAXIMIZED_BOTH);
     }//GEN-LAST:event_BT_CadastrarPetActionPerformed
 
     private void LB_PetShopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_PetShopMouseClicked
@@ -101,7 +100,6 @@ public class TelaHome extends javax.swing.JPanel {
         janela.getContentPane().remove(Janela.TelaC);
         janela.add(Janela.TelaD, BorderLayout.CENTER);
         janela.pack();
-        janela.setExtendedState(Janela.MAXIMIZED_BOTH);
     }//GEN-LAST:event_LB_PetShopMouseClicked
 
     private void LB_ClinicaMedicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_ClinicaMedicaMouseClicked

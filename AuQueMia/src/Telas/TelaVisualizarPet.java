@@ -160,7 +160,6 @@ public class TelaVisualizarPet extends javax.swing.JPanel {
         janela.getContentPane().remove(Janela.TelaI);
         janela.add(Janela.TelaD, BorderLayout.CENTER);
         janela.pack();
-        janela.setExtendedState(Janela.MAXIMIZED_BOTH);
     }//GEN-LAST:event_LB_PetShopMouseClicked
 
     private void LB_ClinicaMedicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_ClinicaMedicaMouseClicked

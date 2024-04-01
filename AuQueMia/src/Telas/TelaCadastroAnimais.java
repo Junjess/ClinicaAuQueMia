@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -16,11 +17,13 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     String url = "jdbc:mysql://localhost:3306";
     String user = "root";
     String password = "";
-    int contAnimais = 1;
-    int contClientes = 1;
+    int contAnimais = 0;
+    int contClientes = 0;
     
     public TelaCadastroAnimais() {
         initComponents();
+        acharQuantAnimal();
+        acharQuantCliente();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,6 +52,7 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         LB_Gênero = new javax.swing.JLabel();
         CB_Genero = new javax.swing.JComboBox<>();
         BT_Cadastrar = new javax.swing.JButton();
+        LB_ClinicaMedica = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -217,6 +221,13 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         });
         add(BT_Cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 550, 340, 70));
 
+        LB_ClinicaMedica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LB_ClinicaMedicaMouseClicked(evt);
+            }
+        });
+        add(LB_ClinicaMedica, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 200, 40));
+
         jLabel3.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(115, 153, 250));
         jLabel3.setText("CPF Dono:");
@@ -233,6 +244,68 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaCadastroPet.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void acharQuantAnimal(){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            Statement statement = connection.createStatement();
+            statement.execute("USE mydb");
+            
+            String query = "SELECT idAnimal FROM animal";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                if (Integer.valueOf(resultSet.getString("idAnimal")) == null) {
+                    contAnimais = 0;
+                }else{
+                    contAnimais = Integer.valueOf(resultSet.getString("idAnimal")) + 1;
+                }                
+            }
+
+            // Fechando recursos
+            resultSet.close();
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    private void acharQuantCliente(){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            Statement statement = connection.createStatement();
+            statement.execute("USE mydb");
+            
+            String query = "SELECT idVeterinario FROM veterinario";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                if (Integer.valueOf(resultSet.getString("idVeterinario")) == null) {
+                    contAnimais = 0;
+                }else{
+                    contAnimais = Integer.valueOf(resultSet.getString("idVeterinario")) + 1;
+                }                
+            }
+
+            // Fechando recursos
+            resultSet.close();
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
     
     public void setarLayout(){
         TF_Nome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -432,13 +505,22 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaE);
         janela.getContentPane().remove(Janela.TelaE);
         janela.add(Janela.TelaJ, BorderLayout.CENTER);
-        janela.pack();
+        janela.pack(); 
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void LB_ClinicaMedicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_ClinicaMedicaMouseClicked
+        Janela.TelaH = new TelaClinicaMedica();
+        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaE);
+        janela.getContentPane().remove(Janela.TelaE);
+        janela.add(Janela.TelaH, BorderLayout.CENTER);
+        janela.pack();
+    }//GEN-LAST:event_LB_ClinicaMedicaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_Cadastrar;
     private javax.swing.JComboBox<String> CB_Genero;
+    private javax.swing.JLabel LB_ClinicaMedica;
     private javax.swing.JLabel LB_Email;
     private javax.swing.JLabel LB_Endereco;
     private javax.swing.JLabel LB_Especie;

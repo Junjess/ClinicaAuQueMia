@@ -1,12 +1,15 @@
 package Telas;
 
+import java.awt.BorderLayout;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class TelaConfiguracoes extends javax.swing.JPanel {
     DefaultTableModel model1;
@@ -38,6 +41,7 @@ public class TelaConfiguracoes extends javax.swing.JPanel {
         TB_Veterinario = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         TB_Secretaria = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -109,6 +113,14 @@ public class TelaConfiguracoes extends javax.swing.JPanel {
         jScrollPane2.setViewportView(TB_Secretaria);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 760, 290));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconeSair.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaConfiguracoes.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -333,6 +345,14 @@ public class TelaConfiguracoes extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Janela.TelaA= new TelaLogin();
+        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(Janela.TelaJ);
+        janela.getContentPane().remove(Janela.TelaJ);
+        janela.add(Janela.TelaA, BorderLayout.CENTER);
+        janela.pack();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LB_CadastroSecretaria;
@@ -345,6 +365,7 @@ public class TelaConfiguracoes extends javax.swing.JPanel {
     private javax.swing.JTable TB_Veterinario;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
