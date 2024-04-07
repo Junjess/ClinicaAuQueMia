@@ -2,17 +2,16 @@ package Telas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -23,9 +22,10 @@ public class TelaServicoPetShop extends javax.swing.JPanel {
     String url = "jdbc:mysql://localhost:3306";
     String user = "root";
     String password = "";
-    private int contConsulta = 0;
+    private int contServico = 0;
     private String servico, idAnimal, idVet;
     private List<String> listaHorariosUsados;
+    private boolean horarioDisponivel = false;
     
     public TelaServicoPetShop(String servico) {
         initComponents();
@@ -154,26 +154,63 @@ public class TelaServicoPetShop extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaServicoPetShop.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-    public void verificarHorario(String horario){
-        LocalDate data = LocalDate.now();
-        if (listaHorariosUsados.size() > 0) {
-            for (int i = 0; i < listaHorariosUsados.size(); i++) {
-                if (!(data.toString() + horario).equals(listaHorariosUsados.get(i))) {
-                    model.addElement(data.toString() + horario);
-                }
+    
+    public void verificarHorario(String nomeMedico, String horario){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            String query = "USE mydb";
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+
+            String queryBuscarIdMedico = "SELECT idVeterinario FROM veterinario WHERE nome = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(queryBuscarIdMedico);
+            preparedStatement.setString(1, nomeMedico);
+            ResultSet resultSetVet = preparedStatement.executeQuery();
+
+            // Se o médico com o nome fornecido for encontrado
+            if (resultSetVet.next()) {
+                int idVeterinario = resultSetVet.getInt("idVeterinario");
+
+                // Verificar se há uma consulta agendada para o médico e horário fornecidos
+                String queryVerificarConsulta = "SELECT COUNT(*) AS total FROM servicos WHERE id_veterinario = ? AND dataHora = ?";
+                PreparedStatement psVerificarConsulta = connection.prepareStatement(queryVerificarConsulta);
+                psVerificarConsulta.setInt(1, idVeterinario);
+                psVerificarConsulta.setString(2, horario);
+                ResultSet rsVerificarConsulta = psVerificarConsulta.executeQuery();
+
+                // Se não houver consulta agendada, o horário está disponível
+                if (rsVerificarConsulta.next()) {
+                    int total = rsVerificarConsulta.getInt("total");
+                    if (total == 0) {
+                        horarioDisponivel = true;
+                    }
+                }                
             }
-        }else{
-            model.addElement(data.toString() + horario);
+            resultSetVet.close();
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
         }
-        
+       
     }
-    public void inserirHorarioTabela(){                
-        verificarHorario(" 09:00:00");
-        verificarHorario(" 10:00:00");
-        verificarHorario(" 11:00:00");
-        verificarHorario(" 14:00:00");
-        verificarHorario(" 15:00:00");
-        verificarHorario(" 16:00:00");                                        
+    
+    public void inserirHorarioTabela(){ 
+        verificarHorarioDosServicos("09:00:00");
+        verificarHorarioDosServicos("10:00:00");
+        verificarHorarioDosServicos("11:00:00");
+        verificarHorarioDosServicos("14:00:00");
+        verificarHorarioDosServicos("15:00:00");
+        verificarHorarioDosServicos("16:00:00");                                    
+    }
+
+    public void verificarHorarioDosServicos(String horario){
+        LocalDate data = LocalDate.now();
+        LocalTime horaAtual = LocalTime.now();
+        if (horaAtual.isBefore(LocalTime.parse(horario))) {
+            model.addElement(data.toString() + " " + horario);
+        }
+
     }
     
     public void acharQuantConsulta(){
@@ -183,14 +220,14 @@ public class TelaServicoPetShop extends javax.swing.JPanel {
             Statement statement = connection.createStatement();
             statement.execute("USE mydb");
             
-            String query = "SELECT idConsulta FROM consulta";
+            String query = "SELECT idServicos FROM servicos";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                contConsulta = Integer.valueOf(resultSet.getString("idConsulta")) + 1;
+                contServico = Integer.valueOf(resultSet.getString("idServicos")) + 1;
             }
 
             // Fechando recursos
@@ -375,38 +412,43 @@ public class TelaServicoPetShop extends javax.swing.JPanel {
             }if (CB_NomePet.getSelectedIndex() == 0 || CB_NomeVet.getSelectedIndex() == 0) {
                 throw new Exception("Selecione os campos necessários");
             }
-            try {
-                Connection connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexao realizada com sucesso na base de dados: " + url);
-                String query = "USE mydb";
-                Statement statement = connection.createStatement();
-                statement.execute(query);
-                
-                acharIdPet();
-                acharIdVet();
-                query = "INSERT INTO Consulta VALUES (?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement consulta = connection.prepareStatement(query);
-                String id = String.valueOf(contConsulta);
-                consulta.setString(1, id);
-                consulta.setString(2, String.valueOf(jList1.getSelectedValue()));
-                listaHorariosUsados.add(jList1.getSelectedValue());
-                consulta.setString(3, "Pet Shop");
-                consulta.setString(4, servico);
-                consulta.setString(5, "60");                    
-                consulta.setString(6, idAnimal);
-                consulta.setString(7, idVet);
-                consulta.execute();
-                JOptionPane.showMessageDialog(null, "Consulta cadastrada com Sucesso!");
-                contConsulta++;
-                cleanTF();               
-                connection.close();
-                consulta.close();
-                statement.close();
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            verificarHorario((String)CB_NomeVet.getSelectedItem(), String.valueOf(jList1.getSelectedValue()));
+            if (horarioDisponivel) {
+                try {
+                    Connection connection = DriverManager.getConnection(url, user, password);
+                    String query = "USE mydb";
+                    Statement statement = connection.createStatement();
+                    statement.execute(query);
 
+                    acharIdPet();
+                    acharIdVet();
+                    query = "INSERT INTO servicos VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement consulta = connection.prepareStatement(query);
+                    String id = String.valueOf(contServico);
+                    consulta.setString(1, id);                    
+                    consulta.setString(2, "Pet Shop");                    
+                    if(servico.equals("Banho")) consulta.setString(3, "40");   
+                    else if(servico.equals("Tosa")) consulta.setString(3, "60");
+                    else consulta.setString(3, "80");
+                    consulta.setString(4, servico);
+                    consulta.setString(5, idAnimal);
+                    consulta.setString(6, idVet);
+                    consulta.setString(7, String.valueOf(jList1.getSelectedValue()));
+                    consulta.execute();
+                    JOptionPane.showMessageDialog(null, "Consulta cadastrada com Sucesso!");
+                    contServico++;
+                    cleanTF();               
+                    connection.close();
+                    consulta.close();
+                    statement.close();
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "O horario já esta ocupado pelo veterinário", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();

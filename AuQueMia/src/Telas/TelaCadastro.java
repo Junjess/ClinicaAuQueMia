@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class TelaCadastro extends javax.swing.JPanel {
@@ -18,8 +21,9 @@ public class TelaCadastro extends javax.swing.JPanel {
     String url = "jdbc:mysql://localhost:3306";
     String user = "root";
     String password = "";
-    int contVeterinario = 1;
-    int contSecretaria = 1;
+    
+    int contVeterinario = 0;
+    int contSecretaria = 0;
         
     public TelaCadastro() {
         initComponents();
@@ -28,7 +32,80 @@ public class TelaCadastro extends javax.swing.JPanel {
         jComboBox1.addItem("Feminino");
         jComboBox1.addItem("Outro");
         TF_CRMV.setEnabled(false);
+        acharQuantSecreataria();
+        acharQuantVeterinario();
     }
+    
+    private String formatarDataDeNascimento(String dataNasc){
+        DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatoSaida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate data = LocalDate.parse(dataNasc, formatoEntrada);
+        String dataFormatada = data.format(formatoSaida);
+        return dataFormatada;
+    }
+    
+    public void acharQuantVeterinario(){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            Statement statement = connection.createStatement();
+            statement.execute("USE mydb");
+           
+            String query = "SELECT idVeterinario FROM veterinario";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+           
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                if (Integer.valueOf(resultSet.getString("idVeterinario")) == null) {
+                    contVeterinario = 1;
+                }else{
+                    contVeterinario = Integer.valueOf(resultSet.getString("idVeterinario")) + 1;
+                }     
+            }
+
+            // Fechando recursos
+            resultSet.close();
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+   
+    public void acharQuantSecreataria(){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            Statement statement = connection.createStatement();
+            statement.execute("USE mydb");
+           
+            String query = "SELECT idSecretaria FROM secretaria";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+           
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                if (Integer.valueOf(resultSet.getString("idSecretaria")) == null) {
+                    contSecretaria = 1;
+                }else{
+                    contSecretaria = Integer.valueOf(resultSet.getString("idSecretaria")) + 1;
+                }   
+            }
+
+            // Fechando recursos
+            resultSet.close();
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+   
     
     public void setarLayout(){
         TF_Nome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -93,7 +170,7 @@ public class TelaCadastro extends javax.swing.JPanel {
 
         LB_DataNasc1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         LB_DataNasc1.setForeground(new java.awt.Color(255, 255, 255));
-        LB_DataNasc1.setText("YYYY-MM-DD");
+        LB_DataNasc1.setText("DD/MM/YYYY");
         add(LB_DataNasc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 90, 30));
 
         TF_Nome.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -342,12 +419,14 @@ public class TelaCadastro extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setarLayout();
         try {
-            if (TF_Nome.getText().equals("")) {
+            if (TF_CPF.getText().length() > 14 || TF_CPF.getText().length() < 14) {
+                throw new Exception("Informe um CPF verdadeiro");
+            }if (TF_Nome.getText().equals("")) {
                 TF_Nome.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (TF_CPF.getText().equals("")) {
                 TF_CPF.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (TF_Email.getText().equals("")) {
-                TF_CPF.setBorder(BorderFactory.createLineBorder(Color.RED));
+                TF_Email.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (jComboBox1.getSelectedIndex() == 0) {
                 jComboBox1.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (TF_DataNasc.getText().equals("")) {
@@ -369,7 +448,6 @@ public class TelaCadastro extends javax.swing.JPanel {
             }
             try {
                 Connection connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexao realizada com sucesso na base de dados: " + url);
                 String query = "USE mydb";
                 Statement statement = connection.createStatement();
                 statement.execute(query);                
@@ -389,7 +467,7 @@ public class TelaCadastro extends javax.swing.JPanel {
                     consulta.setString(5, TF_Email.getText());
                     consulta.setString(6, (String) jComboBox1.getSelectedItem());
                     consulta.setString(7, TF_CRMV.getText());
-                    consulta.setString(8, TF_DataNasc.getText());
+                    consulta.setString(8, formatarDataDeNascimento(TF_DataNasc.getText()));
                     consulta.setString(9, TF_Senha.getText());
                     consulta.setString(10, TF_CPF.getText());
                     consulta.execute();
@@ -406,7 +484,7 @@ public class TelaCadastro extends javax.swing.JPanel {
                     consulta.setString(4, TF_Telefone.getText());
                     consulta.setString(5, TF_Email.getText());
                     consulta.setString(6, (String) jComboBox1.getSelectedItem());
-                    consulta.setString(7, TF_DataNasc.getText());
+                    consulta.setString(7, formatarDataDeNascimento(TF_DataNasc.getText()));
                     consulta.setString(8, TF_Senha.getText());
                     consulta.setString(9, TF_CPF.getText());
                     consulta.execute();

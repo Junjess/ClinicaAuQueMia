@@ -297,7 +297,6 @@ public class TelaClinicaMedica extends javax.swing.JPanel {
             }
             try {
                 Connection connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexao realizada com sucesso na base de dados: " + url);
                 String query = "USE mydb";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
@@ -307,7 +306,6 @@ public class TelaClinicaMedica extends javax.swing.JPanel {
                 query = "INSERT INTO Consulta VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement consulta = connection.prepareStatement(query);
                 String id = String.valueOf(contConsulta);
-                System.out.println(id);
                 consulta.setString(1, id);
                 //Adicionar horario de emergencia, horario do cadastro + 1 hora
                 LocalDateTime agora = LocalDateTime.now();            

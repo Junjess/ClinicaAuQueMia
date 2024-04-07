@@ -3,7 +3,6 @@ package Telas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

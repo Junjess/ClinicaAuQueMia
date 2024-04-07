@@ -19,16 +19,19 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     String password = "";
     int contAnimais = 0;
     int contClientes = 0;
+    private boolean acharDono = false;
     
     public TelaCadastroAnimais() {
         initComponents();
         acharQuantAnimal();
         acharQuantCliente();
+        JOptionPane.showMessageDialog(null, "Caso o cliente já esteja cadastrado, basta informar o cpf e apertar no botão a baixo.");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BT_Cadastrar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         LB_PetShop = new javax.swing.JLabel();
         LB_Home = new javax.swing.JLabel();
@@ -59,6 +62,16 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        BT_Cadastrar1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        BT_Cadastrar1.setForeground(new java.awt.Color(115, 153, 250));
+        BT_Cadastrar1.setText("ACHAR DONO");
+        BT_Cadastrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BT_Cadastrar1ActionPerformed(evt);
+            }
+        });
+        add(BT_Cadastrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 250, 160, 30));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconeConfiguracoes.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,7 +101,7 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
                 TF_CPFDonoKeyPressed(evt);
             }
         });
-        add(TF_CPFDono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 240, 260, -1));
+        add(TF_CPFDono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, 260, -1));
 
         LB_Email.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         LB_Email.setForeground(new java.awt.Color(115, 153, 250));
@@ -231,7 +244,7 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Monospaced", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(115, 153, 250));
         jLabel3.setText("CPF Dono:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 237, -1, 40));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 210, -1, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconeSair.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,7 +273,7 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
 
             while (resultSet.next()) {
                 if (Integer.valueOf(resultSet.getString("idAnimal")) == null) {
-                    contAnimais = 0;
+                    contAnimais = 1;
                 }else{
                     contAnimais = Integer.valueOf(resultSet.getString("idAnimal")) + 1;
                 }                
@@ -283,18 +296,56 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
             Statement statement = connection.createStatement();
             statement.execute("USE mydb");
             
-            String query = "SELECT idVeterinario FROM veterinario";
+            String query = "SELECT idCliente FROM cliente";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                if (Integer.valueOf(resultSet.getString("idVeterinario")) == null) {
-                    contAnimais = 0;
+                if (Integer.valueOf(resultSet.getString("idCliente")) == null) {
+                    contAnimais = 1;
                 }else{
-                    contAnimais = Integer.valueOf(resultSet.getString("idVeterinario")) + 1;
+                    contAnimais = Integer.valueOf(resultSet.getString("idCliente")) + 1;
                 }                
+            }
+
+            // Fechando recursos
+            resultSet.close();
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+  
+    private void acharDono(String cpf){
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            Statement statement = connection.createStatement();
+            statement.execute("USE mydb");
+            
+            String query = "SELECT idCliente FROM cliente WHERE cpf = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, cpf);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                contClientes = resultSet.getInt("idCliente");
+                JOptionPane.showMessageDialog(null, "Cliente encontrado, não é necessário adicionar as outras informações relacionada ao cliente");
+                TF_Email.setEnabled(false);
+                TF_CPFDono.setEnabled(false);
+                TF_Endereco.setEnabled(false);
+                TF_NomeDono.setEnabled(false);
+                TF_Telefone.setEnabled(false);
+                acharDono=true;
+            } else {
+                acharDono=false;  
+                JOptionPane.showMessageDialog(null, "CPF não está cadastrado");
             }
 
             // Fechando recursos
@@ -347,9 +398,9 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         int keyCode = evt.getKeyCode();
         if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
-            TF_Nome.setEditable(true);
+            TF_Especie.setEditable(true);
         } else {
-            TF_Nome.setEditable(false);
+            TF_Especie.setEditable(false);
         }
     }//GEN-LAST:event_TF_EspecieKeyPressed
 
@@ -357,9 +408,9 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         int keyCode = evt.getKeyCode();
         if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
-            TF_Nome.setEditable(true);
+            TF_Raca.setEditable(true);
         } else {
-            TF_Nome.setEditable(false);
+            TF_Raca.setEditable(false);
         }
     }//GEN-LAST:event_TF_RacaKeyPressed
 
@@ -376,9 +427,9 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         int keyCode = evt.getKeyCode();
         if (Character.isLetter(c) || keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_BACK_SPACE) {
-            TF_Nome.setEditable(true);
+            TF_NomeDono.setEditable(true);
         } else {
-            TF_Nome.setEditable(false);
+            TF_NomeDono.setEditable(false);
         }
     }//GEN-LAST:event_TF_NomeDonoKeyPressed
 
@@ -402,52 +453,59 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
     private void BT_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_CadastrarActionPerformed
         setarLayout();
         try {
-            if (TF_Nome.getText().equals("")) {
-                TF_Nome.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if (TF_CPFDono.getText().equals("")) {
-                TF_CPFDono.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if (TF_Email.getText().equals("")) {
-                TF_Email.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if (CB_Genero.getSelectedIndex() == 0) {
+            if (!acharDono) {
+                if (TF_NomeDono.getText().equals("")) {
+                TF_NomeDono.setBorder(BorderFactory.createLineBorder(Color.RED));
+                }if (TF_CPFDono.getText().equals("")) {
+                    TF_CPFDono.setBorder(BorderFactory.createLineBorder(Color.RED));
+                }if (TF_Email.getText().equals("")) {
+                    TF_Email.setBorder(BorderFactory.createLineBorder(Color.RED));
+                }if (TF_Endereco.getText().equals("")) {
+                    TF_Endereco.setBorder(BorderFactory.createLineBorder(Color.RED));
+                }if (TF_Telefone.getText().equals("")) {
+                    TF_Telefone.setBorder(BorderFactory.createLineBorder(Color.RED));
+                }if (TF_CPFDono.getText().equals("")|| TF_NomeDono.getText().equals("") || TF_Endereco.getText().equals("")
+                    || TF_Telefone.getText().equals("") || TF_Email.getText().equals("") ) {
+                    throw new Exception("Preencha ou selecione os campos necessários");
+                }
+            }            
+            if (CB_Genero.getSelectedIndex() == 0) {
                 CB_Genero.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (TF_Idade.getText().equals("")) {
                 TF_Idade.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if (TF_Endereco.getText().equals("")) {
-                TF_Endereco.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if (TF_NomeDono.getText().equals("")) {
-                TF_NomeDono.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }if (TF_Nome.getText().equals("")) {
+                TF_Nome.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (TF_Especie.getText().equals("")) {
                 TF_Especie.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if (TF_Telefone.getText().equals("")) {
-                TF_Telefone.setBorder(BorderFactory.createLineBorder(Color.RED));
             }if (TF_Raca.getText().equals("")) {
                 TF_Raca.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }if ((TF_CPFDono.getText().equals("")|| TF_Nome.getText().equals("") || TF_Email.getText().equals("") || 
-                    TF_NomeDono.getText().equals("") || TF_Idade.getText().equals("") || CB_Genero.getSelectedIndex() == 0 || TF_Endereco.getText().equals("")
-                    || TF_Especie.getText().equals("") || TF_Raca.getText().equals("") || TF_Telefone.getText().equals(""))) {
+            }if ( TF_Nome.getText().equals("") || TF_Idade.getText().equals("") ||
+                    CB_Genero.getSelectedIndex() == 0 ||  TF_Especie.getText().equals("") || TF_Raca.getText().equals("")) {
                 throw new Exception("Preencha ou selecione os campos necessários");
             }
-            
+           
             try {
                 Connection connection = DriverManager.getConnection(url, user, password);
                 System.out.println("Conexao realizada com sucesso na base de dados: " + url);
                 String query = "USE mydb";
                 Statement statement = connection.createStatement();
-                statement.execute(query);   
-                
-                
-                query = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?)";
-                PreparedStatement consulta = connection.prepareStatement(query);
+                statement.execute(query);  
+                PreparedStatement consulta;
                 String idAnimais = String.valueOf(contAnimais);
                 String idCliente = String.valueOf(contClientes);
-                consulta.setString(1, idCliente);
-                consulta.setString(2, TF_NomeDono.getText());
-                consulta.setString(3, TF_Endereco.getText());
-                consulta.setString(4, TF_Telefone.getText());
-                consulta.setString(5, TF_Email.getText());
-                consulta.setString(6, TF_CPFDono.getText());
-                consulta.execute();
-                
+               
+                if (!acharDono) {
+                    query = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?)";
+                    consulta = connection.prepareStatement(query);
+                   
+                    consulta.setString(1, idCliente);
+                    consulta.setString(2, TF_NomeDono.getText());
+                    consulta.setString(3, TF_Endereco.getText());
+                    consulta.setString(4, TF_Telefone.getText());
+                    consulta.setString(5, TF_Email.getText());
+                    consulta.setString(6, TF_CPFDono.getText());
+                    consulta.execute();
+                }                                
                 query = "INSERT INTO Animal VALUES (?, ?, ?, ?, ?, ?, ?)";
                 consulta = connection.prepareStatement(query);                
                 consulta.setString(1, idAnimais);
@@ -458,18 +516,20 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
                 consulta.setString(6, (String) CB_Genero.getSelectedItem());
                 consulta.setString(7, idCliente);
                 consulta.execute();
-                
-                
+               
+               
                 contAnimais++;
                 contClientes++;
-                JOptionPane.showMessageDialog(null, "Animal e Dono Cadastrado com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastrado feito com Sucesso!");
                 cleanTF();
                 connection.close();  
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_BT_CadastrarActionPerformed
 
     private void LB_HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_HomeMouseClicked
@@ -516,9 +576,18 @@ public class TelaCadastroAnimais extends javax.swing.JPanel {
         janela.pack();
     }//GEN-LAST:event_LB_ClinicaMedicaMouseClicked
 
+    private void BT_Cadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_Cadastrar1ActionPerformed
+        if (TF_CPFDono.getText().length() == 14)
+            acharDono(TF_CPFDono.getText());
+        else
+            JOptionPane.showMessageDialog(null, "Informe um CPF válido(14 caracteres)");
+        
+    }//GEN-LAST:event_BT_Cadastrar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_Cadastrar;
+    private javax.swing.JButton BT_Cadastrar1;
     private javax.swing.JComboBox<String> CB_Genero;
     private javax.swing.JLabel LB_ClinicaMedica;
     private javax.swing.JLabel LB_Email;

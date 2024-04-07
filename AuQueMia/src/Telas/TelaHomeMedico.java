@@ -55,7 +55,7 @@ public class TelaHomeMedico extends javax.swing.JPanel {
     }
     
     public void preencherTabela(String idVet){
-    try {
+        try {
             Connection connection = DriverManager.getConnection(url, user, password);
 
             Statement statement = connection.createStatement();
@@ -75,13 +75,27 @@ public class TelaHomeMedico extends javax.swing.JPanel {
                 String nomePet = acharPet(idPet);
                 model.addRow(new Object[]{data, descricao, nomePet});
             }
+            
+            query = "SELECT dataHora, descricao, id_animal FROM servicos WHERE id_veterinario = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, idVet);
+            
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String data = resultSet.getString("dataHora");
+                String descricao = resultSet.getString("descricao");
+                String idPet = resultSet.getString("id_animal");
+                String nomePet = acharPet(idPet);
+                model.addRow(new Object[]{data, descricao, nomePet});
+            }
 
             // Fechando recursos
             resultSet.close();
             preparedStatement.close();
             statement.close();
-            connection.close();
-            
+            connection.close();            
         } catch (Exception e) {
             e.printStackTrace();
         }        
@@ -132,14 +146,11 @@ public class TelaHomeMedico extends javax.swing.JPanel {
         add(LB_NOME, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, -1, 70));
 
         jTable1.setBackground(new java.awt.Color(49, 47, 48));
-        jTable1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jTable1.setForeground(new java.awt.Color(115, 153, 250));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Data ", "Descrição", "Nome do Pet"

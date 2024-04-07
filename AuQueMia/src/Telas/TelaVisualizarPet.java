@@ -90,10 +90,7 @@ public class TelaVisualizarPet extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Nome", "Especie", "Raça", "Idade", "Genero"
